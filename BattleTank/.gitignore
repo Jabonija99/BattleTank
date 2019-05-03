@@ -1,3 +1,7 @@
+# Unreal Starter Content
+Content/StarterContent/Textures
+Content/StarterContent/HDRI
+
 # Visual Studio 2015 user specific files
 .vs/
 
@@ -47,8 +51,6 @@
 # Precompiled Assets
 SourceArt/**/*.png
 SourceArt/**/*.tga
-BuildingEscape/Content/StarterContent/Textures
-BuildingEscape/Content/StarterContent/HDRI
 
 # Binary Files
 Binaries/*
