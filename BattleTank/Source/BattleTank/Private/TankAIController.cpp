@@ -6,10 +6,6 @@
 #include "Engine/LocalPlayer.h"
 #include "TankPlayerController.h"
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
 
 void ATankAIController::BeginPlay()
 {
@@ -40,7 +36,15 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (GetPlayerTank())
+	{
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
 
+ATank* ATankAIController::GetControlledTank() const
+{
+	return Cast<ATank>(GetPawn());
 }
 
 ATank* ATankAIController::GetPlayerTank() const
