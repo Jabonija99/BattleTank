@@ -8,7 +8,7 @@ void UTankBarrel::Elevate(float RelativeSpeed)
 	//Move Barrel the right amount this frame
 	//Given max elevation speed and frame time
 	auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("%f: Barrel->Elevate() called: %f"), Time, RelativeSpeed);
+	//UE_LOG(LogTemp, Warning, TEXT("%f: Barrel->Elevate() called: %f"), Time, RelativeSpeed);
 
 }
 
