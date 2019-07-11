@@ -2,6 +2,7 @@
 
 #include "TankMovementComponent.h"
 #include "TankTrack.h"
+#include "BattleTank.h"
 
 void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
@@ -22,8 +23,13 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 {
 
 	if (!LeftTrack || !RightTrack) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Intend Turn Right throw: %f"), Throw)
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
+}
 
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) 
+{
+	auto TankName = GetOwner()->GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s: Vectoring to %s"), *TankName, *MoveVelocity.ToString());
 }
