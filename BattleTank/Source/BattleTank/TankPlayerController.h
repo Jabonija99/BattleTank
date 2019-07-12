@@ -21,7 +21,10 @@ public:
 	
 	virtual void Tick(float DeltaTime) override;
 
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
+
 	
 private:
 	//Begin moving barrel towards the angle needed to 
