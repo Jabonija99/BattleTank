@@ -16,6 +16,14 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = false;
 }
 
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Tempest: %s"), *TankName);
+}
+
 void ATank::AimAt(FVector HitLocation) 
 {
 	if (!TankAimingComponent) { return; }
