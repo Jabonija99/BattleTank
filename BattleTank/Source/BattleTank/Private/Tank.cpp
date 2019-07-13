@@ -14,6 +14,9 @@ ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
+
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("Tempest %s: Tank C++ Construct"), *TankName);
 }
 
 void ATank::BeginPlay()
@@ -21,7 +24,7 @@ void ATank::BeginPlay()
 	Super::BeginPlay();
 
 	auto TankName = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("Tempest: %s"), *TankName);
+	UE_LOG(LogTemp, Warning, TEXT("Tempest %s: Tank C++ Begin Play"), *TankName);
 }
 
 void ATank::AimAt(FVector HitLocation) 
@@ -36,7 +39,6 @@ void ATank::Fire()
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	if (Barrel && isReloaded) 
 	{
-
 		//Spawn a projectile at the socket location on barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBlueprint,
