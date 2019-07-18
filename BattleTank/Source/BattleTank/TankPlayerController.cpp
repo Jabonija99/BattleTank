@@ -13,14 +13,8 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
-	if (AimingComponent) 
-	{
-		FoundAimingComponent(AimingComponent);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Player controller can't find aiming component at Begin Play"));
-	}
+	if (!ensure(AimingComponent)) { return; }
+	FoundAimingComponent(AimingComponent);
 }
 
 
@@ -63,11 +57,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector & HitLocation) const
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
 		//Line-trace along that look direction and see what we hit (up to max range)
-		//GetLookVectorHitLocation();
 		GetLookVectorHitLocation(LookDirection, HitLocation);
-		
-			//UE_LOG(LogTemp, Warning, TEXT("Vector Hit Location: %s"), *HitLocation.ToString());
-		
 	}
 
 	return true;
