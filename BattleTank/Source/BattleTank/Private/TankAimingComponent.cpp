@@ -21,6 +21,22 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
+void UTankAimingComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	//Begins game with initial reload time
+	LastFireTime = FPlatformTime::Seconds();
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
+{
+	if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds)
+	{
+		FiringStatus = EFiringStatus::Reloading;
+	}
+	//TODO Handle aiming and locked states
+}
+
 void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
 	Barrel = BarrelToSet;
@@ -60,10 +76,10 @@ void UTankAimingComponent::Fire()
 {
 	//Delete comments to enable firing
 	//Barrel = FindComponentByClass<UTankBarrel>();
-	if (!ensure(Barrel && ProjectileBlueprint)) { return; }
+	if (!ensure(Barrel)) { return; }
+	if (!ensure(ProjectileBlueprint)) { return; }
 
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if (isReloaded)
+	if (FiringStatus != EFiringStatus::Reloading)
 	{
 		//Spawn a projectile at the socket location on barrel
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
