@@ -16,12 +16,15 @@ class BATTLETANK_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+protected:
+	//Distance AI tank can approach player
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 8000;
+
 private:
 
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
 
-	//Distance AI tank can approach player
-	float AcceptanceRadius = 3000;
 };

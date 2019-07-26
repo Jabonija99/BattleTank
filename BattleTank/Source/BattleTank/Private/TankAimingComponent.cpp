@@ -64,6 +64,11 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 	}
 }
 
+EFiringStatus UTankAimingComponent::GetFiringState() const
+{
+	return FiringStatus;
+}
+
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
 {
