@@ -41,7 +41,7 @@ void ATankAIController::Tick(float DeltaTime)
 	auto ControlledTank = GetPawn();
 
 	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
-	if (!ensure(PlayerTank && AimingComponent && ControlledTank)) { return; }
+	if (!(PlayerTank && AimingComponent && ControlledTank)) { return; }
 
 	//Move towards the player
 	MoveToActor(PlayerTank, AcceptanceRadius); //TODO check radius is in cm
